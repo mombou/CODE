@@ -1,4 +1,4 @@
-package model2.mvcmember;
+package member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import membership.MemberDAO;
-
-@WebServlet("/mvcmember/find.do")
+@WebServlet("/member/find.do")
 public class FindController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("find doGet()");
 		String mode = request.getParameter("mode");
-		System.out.println(mode);
+		System.out.println("mode = " + mode);
 		
 		if(mode.equals("pass")) {
-			response.sendRedirect("/WebProject01/Find.jsp");
+			response.sendRedirect("/Member/Find.jsp");
 		}
 	}
 
@@ -32,12 +30,14 @@ public class FindController extends HttpServlet {
 		//System.out.println(askOpt);
 		
 		MemberDAO dao = new MemberDAO();
+		MemberDTO dto = new MemberDTO();
 		boolean isChk = dao.findPass(id, askOpt, answer);
 		
+		dao.close();
 		//System.out.println(isChk);
 		
 		request.setAttribute("isChk", isChk + "");
 		request.setAttribute("id", id);
-		request.getRequestDispatcher("/WebProject01/Find.jsp").forward(request, response);
+		request.getRequestDispatcher("/Member/Find.jsp").forward(request, response);
 	}
 }
