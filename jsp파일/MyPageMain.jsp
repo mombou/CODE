@@ -80,13 +80,13 @@ div{
 	    
 	  <div class="listContainer">
 	  		<div class="text">
-		    <a href="/mvcMember/mypage.do?mode=profile&id=${UserId }" class="item">회원정보</a>
+		    <a href="/member/mypage.do?mode=profile&id=${UserId }" class="item">회원정보</a>
 		    </div>
 		    <div class="text">
-		    <a href="/mvcMember/mypage.do?mode=wishlist" class="item">즐겨찾기</a>
+		    <a href="/member/mypage.do?mode=wishlist" class="item">즐겨찾기</a>
 		    </div>
 		    <div class="text">
-		    <a href="/mvcMember/mypage.do?mode=mylist" class="item">내가 쓴 리뷰</a>
+		    <a href="/member/mypage.do?mode=mylist" class="item">내가 쓴 리뷰</a>
 		    </div>
 		  	<div class="text">
 		    <a href="#" class="item">고객센터</a>

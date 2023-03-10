@@ -133,13 +133,15 @@ h2 {
 </head>
 <body>
 
+<jsp:include page="Index.jsp"/>
+${alert }
 <div class="wrap">
+${passMsg }
 	<div class="login">
 		<c:choose>
 			<c:when test="${UserId eq null}">
-	
 			       <h2>Log-in</h2>
-			       <form action="/mvcMember/login.do" method="post" onsubmit="return validateForm(this)">
+			       <form action="/member/login.do" method="post" onsubmit="return validateForm(this)">
 			       <div class="login_sns">
 				       <li><a href=""><i class="fab fa-instagram"></i></a></li>
 				       <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
@@ -153,7 +155,7 @@ h2 {
 			       </div>
 			       <div class="login_etc">
 			           <div class="forgot_pw">
-			           <a href="/mvcMember/find.do?mode=pass">Forgot Password?</a>
+			           <a href="/member/find.do?mode=pass">Forgot Password?</a>
 			   			</div>
 			       </div>
 			       <div class="submit">
@@ -165,9 +167,9 @@ h2 {
 		       <c:otherwise>
 		       		<h2>${UserId }(${UserName })님 안녕하세요</h2>
 		       		<div class="submit">
-		       		<input type="button" value="Logout" onclick="location.href='/mvcMember/login.do';">
+		       		<input type="button" value="Logout" onclick="location.href='/member/login.do';">
 		       		<c:if test="${UserId eq 'admin' }">
-		       		<br><br><input type="button" value="Member List" onclick="location.href='/mvcMember/list.do';">
+		       		<br><br><input type="button" value="Member List" onclick="location.href='/member/list.do';">
 		       		</c:if>
 		       		</div>
 		       </c:otherwise>

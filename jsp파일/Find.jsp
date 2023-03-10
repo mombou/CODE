@@ -47,11 +47,14 @@
 
 </head>
 <body>
+
+<jsp:include page="Index.jsp"/>
+
 <div id="wrap" width="50%" align="center">
 	<h2>비밀번호 찾기</h2>
 	<c:choose>
 		<c:when test="${isChk == null || isChk != 'true' }">
-			<form action="/mvcMember/find.do" name="findFrm" method="post" 
+			<form action="/member/find.do" name="findFrm" method="post" 
 				onsubmit="return passCheck(this)">
 				<input type="hidden" id="optVal" name="optVal">
 				<table>
@@ -61,10 +64,11 @@
 				<tr>
 					<td>
 					<select name="sel" id="sel">
-						<option>질문</option>
-						<option>보물1호</option>
-						<option>초등학교</option>
-						<option>좋아하는음식</option>
+						<option>질문을 선택해주세요.</option>
+							<option value="제일 좋아하는 장소는?">제일 좋아하는 장소는?</option>
+							<option value="소중하게 여기는 보물은?">소중하게 여기는 보물은?</option>
+							<option value="제일 좋아하는 인물은?">제일 좋아하는 인물은?</option>
+							<option value="제일 좋아하는 음식은?">제일 좋아하는 음식은?</option>
 					</select>
 					</td>
 				</tr>
@@ -76,7 +80,7 @@
 			</form>
 		</c:when>
 		<c:otherwise>
-			<form action="/mvcMember/update.do" method="post" onsubmit="return validateForm(this)">
+			<form action="/member/update.do" method="post" onsubmit="return validateForm(this)">
 				<input type="hidden" name="id" value="${id }">
 				<table>
 				<tr>

@@ -10,22 +10,18 @@
 	display: none;
 	color: red;
 }
-
 #true {
 	color: red;
 }
-
 .side {
 	font-size: 12px;
 	color: #5D5D5D;
 }
-
 .main {
 	font-size: 13px;
 	color: #5D5D5D;
 	font-weight: bold;
 }
-
 .text {
 	width: 200px;
 	height: 32px;
@@ -36,7 +32,6 @@
 	padding-left: 15px;
 	background-color: rgb(233, 233, 233);
 }
-
 .button {
 	width: 110px;
 	height: 32px;
@@ -48,7 +43,6 @@
 	align-content: center;
 	background-color: #E33333;
 }
-
 .select {
 	width: 200px;
 	height: 32px;
@@ -59,8 +53,6 @@
 	outline: none;
 	background-color: rgb(233, 233, 233);
 }
-
-
 </style>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -70,14 +62,14 @@
 <script>
 // 폼 내용 검증
 	function validateForm(form) {
-		if (form.user_id.value == "") {
+		if (form.user_id.value.length === 0) {
 			alert("아이디를 입력하세요.");
 			user_id.focus();
 			return false;
 		}
 		if (user_id.value.length < 3 || user_id.value.length > 20) {
 			alert("아이디 글자수가 맞지 않습니다.");
-			user_id.value = ""
+			//user_id.value = ""
 			user_id.focus();
 			return false;
 		}
@@ -106,7 +98,7 @@
 			form.user_pass.focus();
 			return false;
 		}
-		if (form.nick.value == "") {
+		if (form.nick.value.length === 0) {
 			alert("닉네임을 입력하세요.");
 			form.nick.focus();
 			return false;
@@ -116,17 +108,16 @@
 			form.nick.focus();
 			return false;
 		}
-		if (form.name.value == "") {
+		if (form.name.value.length === 0) {
 			alert("이름을 입력하세요.");
 			form.name.focus();
 			return false;
 		}
-		if (form.answer.value == "") {
+		if (form.answer.value.length === 0) {
 			alert("답변을 입력하세요.");
 			form.answer.focus();
 			return false;
 		}
-		
 		//select에서 선택 안했을 때
 		if(form.birth.selectedIndex === 0 || form.month.selectedIndex === 0 
 				|| form.day.selectedIndex === 0){
@@ -142,14 +133,15 @@
 			return false
 		}
 	};
-	
+	</script>
+	<script>
 	//1) 아이디, 닉네임 중복 체크 => ajax
 	//2) 중복된 아이디이거나 중복 체크 안했을 때 가입하기 버튼 disabled = false 처리
 	//아이디 중복 체크
 	function idCheck(){
 		const id = document.querySelector("#user_id");
 		
-		if (id.value == "") {
+		if (id.value.length === 0) {
 			alert("아이디를 입력하세요.");
 			id.focus();
 			return false;
@@ -165,7 +157,7 @@
 		
 		const req = new XMLHttpRequest()
 		
-		req.open("GET", "/mvcMember/check.do" + param);
+		req.open("GET", "/member/check.do" + param);
 		req.send()
 		req.onreadystatechange = function(){
 			if(req.status === 200 && req.readyState === 4){
@@ -174,7 +166,7 @@
 					id.value = ""
 					document.querySelector("#id_used").style.display = "block";
 					document.querySelector("#id_notUsed").style.display = "none";
-					document.querySelector("#submitBtn").disabled = true
+					//document.querySelector("#submitBtn").disabled = true
 				}
 				else if(req.responseText === "0"){
 					//alert("사용 가능한 아이디입니다")
@@ -205,7 +197,7 @@
 		
 		const req = new XMLHttpRequest()
 		
-		req.open("GET", "/mvcMember/check.do" + param);
+		req.open("GET", "/member/check.do" + param);
 		req.send()
 		req.onreadystatechange = function(){
 			if(req.status === 200 && req.readyState === 4){
@@ -214,7 +206,7 @@
 					nick_id.value = ""
 					document.querySelector("#nick_used").style.display = "block";
 					document.querySelector("#nick_notUsed").style.display = "none";
-					document.querySelector("#submit").disabled = true
+					//document.querySelector("#submit").disabled = true
 				}
 				else if(req.responseText === "0"){
 					//alert("사용 가능한  닉네임입니다")
@@ -228,8 +220,8 @@
 </script>
 </head>
 <body>
-
-	<form name="writeFrm" method="post" action="/mvcMember/join.do"
+	<jsp:include page="Index.jsp"/>
+	<form method="post" action="/member/join.do"
 		onsubmit="return validateForm(this);">
 		<table width="50%" align="center">
 			<tr>
@@ -447,13 +439,15 @@
 				<td align="center"><p class="main">
 						<font color="#E33333">*</font> 질문
 					</p></td>
-				<td colspan="3"><select class="select" id="ask" name="ask">
-						<option>질문을 선택해주세요.</option>
-						<option id="ask" value="제일 좋아하는 장소는?">제일 좋아하는 장소는?</option>
-						<option id="ask" value="소중하게 여기는 보물은?">소중하게 여기는 보물은?</option>
-						<option id="ask" value="제일 좋아하는 인물은?">제일 좋아하는 인물은?</option>
-						<option id="ask" value="제일 좋아하는 음식은?">제일 좋아하는 음식은?</option>
-				</select></td>
+				<td colspan="3">
+					<select class="select" id="ask" name="ask">
+							<option>질문을 선택해주세요.</option>
+							<option id="ask" value="제일 좋아하는 장소는?">제일 좋아하는 장소는?</option>
+							<option id="ask" value="소중하게 여기는 보물은?">소중하게 여기는 보물은?</option>
+							<option id="ask" value="제일 좋아하는 인물은?">제일 좋아하는 인물은?</option>
+							<option id="ask" value="제일 좋아하는 음식은?">제일 좋아하는 음식은?</option>
+					</select>
+				</td>
 			<tr>
 				<td align="center">
 					<p class="main">
@@ -492,8 +486,6 @@
 			<tr>
 				<td colspan="3"><hr></td>
 			</tr>
-
-			<!-- 좋아하는 장르 -->
 			<tr>
 				<td align="center"><p class="main">좋아하는 장르</p></td>
 				<td colspan="3">
@@ -507,15 +499,9 @@
 					 </p>
 				</td>
 			</tr>
-			<!-- 클래스 -->
-			<tr>
-				<td align="center"><p class="main">클래스</p></td>
-				<td colspan="3"><input class="text" type="text" id="user_class"
-					name="user_class"></td>
-			</tr>
 			<tr>
 				<td colspan="4" align="center">
-					<button type="submit" id="submitBtn" class="button">가입하기</button>
+					<input type="submit" id="submitBtn" class="button" value="가입하기"/>
 				</td>
 			</tr>
 		</table>
