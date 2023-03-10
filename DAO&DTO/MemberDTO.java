@@ -1,4 +1,4 @@
-package model2.mvcmember;
+package member;
 
 public class MemberDTO {
 	

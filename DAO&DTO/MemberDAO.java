@@ -1,8 +1,8 @@
-package model2.mvcmember;
+package member;
 
-import Common.MyJDBConnect;
+import common.JDBConnect;
 
-public class MemberDAO extends MyJDBConnect {
+public class MemberDAO extends JDBConnect {
 	//WebProject01
 
 	public MemberDAO() {
@@ -133,7 +133,8 @@ public class MemberDAO extends MyJDBConnect {
     }
 	
 	// 비밀번호 변경
-	public void newPass(String id, String pass) {
+	public int newPass(String id, String pass) {
+		int res = 0;
         String query = "update member set user_pass = ? where user_id=?"; 
 
         try {
@@ -146,6 +147,7 @@ public class MemberDAO extends MyJDBConnect {
         catch (Exception e) {
             e.printStackTrace();
         }
+        return res;
     }
 	
 	// 3. 리뷰 개수 확인 => member, review join
