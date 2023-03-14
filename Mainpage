@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+   <%@page import="movie.*"%> 
+   <%@page import="java.util.ArrayList"%>
+   
+   <jsp:include page="common/Category.jsp" />
+<jsp:include page="common/Link.jsp" />
+<!DOCTYPE  >
+<html>
+<head>
+ <link href="css/image.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>메인페이지</title>
+</head>
+<body>
+<div >
+		<span >더조은이 추천하는 콘텐츠</span>
+		<a href="#" >더보기</a>
+	</div>
+   <%
+        movieDAO dao=new movieDAO();
+        //dao.dbConn();   db 연결 확인 작업
+        
+         ArrayList<movieDTO>list = dao.movieList();
+         for(movieDTO dto:list){            
+%>
+        <td>
+                
+               
+              <tr> <img width="200px" src="<%=dto.getImage()%>" /></tr>
+        <tr><%=dto.getTitle() %></tr>
+     
+        </td>
+        
+        <% 
+       
+ }
+         %>
+          </table>
+          
+          
+      
+</body>
+</html>
+<div class="copy">
+    더조은 아카데미
+</div>
+        
